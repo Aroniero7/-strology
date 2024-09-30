@@ -1,6 +1,6 @@
 import React from 'react';
 import { useTelegram } from '../hooks/useTelegram';
-
+import './App.css';
 
 
 const Body = () => {
@@ -11,7 +11,7 @@ const Body = () => {
 
             <span className={'username'}>Давай знакомится, 
                 {user?.username || user?.first_name || 'Неизвестный пользователь'}
-      </span>
+            </span>
       <p>Ответь на 4 постых вопроса. <br/>
       Это поможет нам узнать тебя получше. </p>
         </div>
