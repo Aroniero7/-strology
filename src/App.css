@@ -2,8 +2,15 @@
   margin:0;
   padding:0;
   box-sizing: border-box;
+  background: url(../img/image8.png);
+  background-repeat: no-repeat;
+  background-size: contain;
 }
 body{
+
   background: var(--tg-theme-bg-color);
   color: var(--tg-theme-text-color);
+}
+.App{
+
 }
