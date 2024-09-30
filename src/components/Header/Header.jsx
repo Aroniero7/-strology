@@ -12,7 +12,7 @@ const Header = () => {
             <Button onClick={onClose}>Закрыть</Button>
 
             <span className={'username'}>
-                {user?.username}
+                {user?.username || user?.first_name || 'Неизвестный пользователь'}
             </span>
         </div>
     );
