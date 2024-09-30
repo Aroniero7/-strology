@@ -9,26 +9,18 @@ function App() {
   const {onToggleButton, tg} = useTelegram();
 
   useEffect(() => {
-    console.log("Telegram API:", tg);
-    console.log("Init data unsafe:", tg.initDataUnsafe);
+    tg.ready();
+  },[])
 
-    if (tg.initDataUnsafe?.user) {
-        console.log("User data found:", tg.initDataUnsafe.user);
-        setUser(tg.initDataUnsafe.user);
-    } else {
-        console.log("No user data found.");
-    }
-}, [tg]);
  
 
 
   return (
     <div className="App">
-     <Header />
+      <Header />
      <button onClick={onToggleButton}>toogle</button>
     </div>
   );
-  
 }
 
 export default App;
