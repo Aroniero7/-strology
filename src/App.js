@@ -30,6 +30,5 @@ function App() {
   );
   
 }
-console.log(tg.initDataUnsafe);
 
 export default App;
