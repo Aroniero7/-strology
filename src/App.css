@@ -26,9 +26,9 @@ body{
   background: url(../img/image8.png);
   background-repeat: no-repeat;
   box-sizing: border-box;
-  max-width: 380px;
+  max-width: 340px;
   width: 100%;
-  max-height: 660px;
+  max-height: 640px;
   height: 100%;
   position: relative;
 }
