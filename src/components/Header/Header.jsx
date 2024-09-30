@@ -17,5 +17,6 @@ const Header = () => {
         </div>
     );
 };
+console.log(tg.initDataUnsafe);
 
 export default Header;

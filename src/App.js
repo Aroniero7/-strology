@@ -21,6 +21,8 @@ function App() {
      <button onClick={onToggleButton}>toogle</button>
     </div>
   );
+  
 }
+console.log(tg.initDataUnsafe);
 
 export default App;
