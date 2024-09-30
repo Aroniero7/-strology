@@ -1,10 +1,20 @@
 *{
   margin:0;
   padding:0;
-  box-sizing: border-box;
-  background: url(../img/image8.png);
-  background-repeat: no-repeat;
+
+
+
   font-family: 'Involve', sans-serif;
+}
+#root{
+
+  font-family: Arial, sans-serif; /* Шрифт по умолчанию */
+  height: 100vh; /* Высота экрана */
+  display: flex; /* Используем флексбокс для центрирования */
+  justify-content: center; /* Центрируем по горизонтали */
+  align-items: center; /* Центрируем по вертикали */
+  color: #fff;
+  flex-wrap: wrap;
 }
 body{
 
@@ -12,6 +22,10 @@ body{
   color: var(--tg-theme-text-color);
 }
 .App{
+  text-align: center;
+  background: url(../img/image8.png);
+  background-repeat: no-repeat;
+  box-sizing: border-box;
   max-width: 360px;
   width: 100%;
   max-height: 640px;
