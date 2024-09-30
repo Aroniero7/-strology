@@ -23,12 +23,11 @@ body{
 }
 .App{
   text-align: center;
-  background: url(../img/image8.png);
-  background-repeat: no-repeat;
+  background: url(http://localhost:3000/static/media/image8.6218e60….png);
+  background-repeat: round;
   box-sizing: border-box;
-  max-width: 340px;
+  max-width: 100%;
   width: 100%;
-  max-height: 640px;
   height: 100%;
   position: relative;
 }
