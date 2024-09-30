@@ -1,8 +1,9 @@
 import React from 'react';
 import './Button.css';
-const Button = (props) => {
+const Button = () => {
     return(
-        <button {... props} className={'button' + props.className}/>
+        <button onClick={onToggleButton} className='button'>Начать</button>
+
     );
 };
 
