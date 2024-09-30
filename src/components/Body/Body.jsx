@@ -9,9 +9,9 @@ const Body = () => {
     return(
         <div className={'body'}>
 
-            <span className={'username'}>Давай знакомится, 
+            <h2 className={'username'}>Давай знакомится,<br/>
                 {user?.username || user?.first_name || 'Неизвестный пользователь'}
-            </span>
+            </h2>
       <p>Ответь на 4 постых вопроса. <br/>
       Это поможет нам узнать тебя получше. </p>
         </div>

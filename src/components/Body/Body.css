@@ -1,5 +1,13 @@
 .body{
+
     color: #fff;
     text-align: center;
-    max-width: 360px;
+    position: relative;
+    margin-top: 20%;
+    margin-bottom: 50%;
+   
+
+}
+p{
+    margin-top: 25px;
 }

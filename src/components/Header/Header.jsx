@@ -10,7 +10,7 @@ const Header = () => {
 
     return(
         <div className={'header'}>
-            <Button onClick={onClose}>Закрыть</Button>
+            
         </div>
     );
 };

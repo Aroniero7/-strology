@@ -19,7 +19,7 @@ function App() {
     <div className="App">
       <Header />
       <Body />
-     <button onClick={onToggleButton}>toogle</button>
+     <button onClick={onToggleButton} className='button'>Начать</button>
     </div>
   );
 }
