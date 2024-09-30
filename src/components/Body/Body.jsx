@@ -1,6 +1,6 @@
 import React from 'react';
 import { useTelegram } from '../hooks/useTelegram';
-import './App.css';
+import './Body.css';
 
 
 const Body = () => {
