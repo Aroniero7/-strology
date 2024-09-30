@@ -1,6 +1,7 @@
 import { useTelegram } from '../hooks/useTelegram';  
 import './Body.css';  
 import React, { useState } from 'react';  
+import { useNavigate } from 'react-router-dom'; // для редиректа
 
 const Body = ({ step, userName, handleStart, handleNext, formData }) => {  
   const { user } = useTelegram();  
@@ -11,7 +12,78 @@ const Body = ({ step, userName, handleStart, handleNext, formData }) => {
   const [year, setYear] = useState('');   
   const [placeOfBirth, setPlaceOfBirth] = useState('');   
   const [username, setUsername] = useState('');  
-  const [unknownTime, setUnknownTime] = useState(false); 
+  const [unknownTime, setUnknownTime] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(''); // для отображения ошибки
+  const [zodiacSign, setZodiacSign] = useState(''); // для хранения знака зодиака
+  const navigate = useNavigate(); // для редиректа
+
+  // Функция для вычисления знака зодиака
+  const getZodiacSign = (day, month) => {
+    if ((month == 1 && day >= 20) || (month == 2 && day <= 18)) {
+      return "Водолей";
+    } else if ((month == 2 && day >= 19) || (month == 3 && day <= 20)) {
+      return "Рыбы";
+    } else if ((month == 3 && day >= 21) || (month == 4 && day <= 19)) {
+      return "Овен";
+    } else if ((month == 4 && day >= 20) || (month == 5 && day <= 20)) {
+      return "Телец";
+    } else if ((month == 5 && day >= 21) || (month == 6 && day <= 20)) {
+      return "Близнецы";
+    } else if ((month == 6 && day >= 21) || (month == 7 && day <= 22)) {
+      return "Рак";
+    } else if ((month == 7 && day >= 23) || (month == 8 && day <= 22)) {
+      return "Лев";
+    } else if ((month == 8 && day >= 23) || (month == 9 && day <= 22)) {
+      return "Дева";
+    } else if ((month == 9 && day >= 23) || (month == 10 && day <= 22)) {
+      return "Весы";
+    } else if ((month == 10 && day >= 23) || (month == 11 && day <= 21)) {
+      return "Скорпион";
+    } else if ((month == 11 && day >= 22) || (month == 12 && day <= 21)) {
+      return "Стрелец";
+    } else if ((month == 12 && day >= 22) || (month == 1 && day <= 19)) {
+      return "Козерог";
+    }
+  };
+
+  const handleFinish = () => {
+    if (!day || !month || !year || !placeOfBirth || !username) {
+      setErrorMessage('Пожалуйста, заполните все поля.');
+      return;
+    }
+
+    const sign = getZodiacSign(day, month);
+    setZodiacSign(sign);
+    navigate('/main', { state: { zodiacSign: sign } });
+  };
+
+  const handleNextWithValidation = (currentData) => {
+    setErrorMessage(''); // сброс сообщения об ошибке
+
+    // Валидация для каждого шага
+    if (step === 1 && (!hours && !unknownTime)) {
+      setErrorMessage('Укажите время рождения или выберите "Я не знаю времени".');
+      return;
+    }
+
+    if (step === 2 && (!day || !month || !year)) {
+      setErrorMessage('Заполните все поля даты рождения.');
+      return;
+    }
+
+    if (step === 3 && !placeOfBirth) {
+      setErrorMessage('Заполните поле места рождения.');
+      return;
+    }
+
+    if (step === 4 && !username) {
+      setErrorMessage('Введите ваше имя.');
+      return;
+    }
+
+    // Переход на следующий шаг, если валидация пройдена
+    handleNext(currentData);
+  };
 
   const renderStep = () => {  
     switch (step) {  
@@ -57,7 +129,7 @@ const Body = ({ step, userName, handleStart, handleNext, formData }) => {
               <button  
                 onClick={() => {  
                   setUnknownTime(true); 
-                  handleNext({ hours: '', minutes: '' }); 
+                  handleNextWithValidation({ hours: '', minutes: '' }); 
                 }}  
                 className='button'   
                 style={{ margin: 'auto', backgroundColor: unknownTime ? 'lightcoral' : 'initial' }} 
@@ -65,9 +137,8 @@ const Body = ({ step, userName, handleStart, handleNext, formData }) => {
                 Я не знаю времени  
               </button>  
             </div> 
-            <button onClick={() => handleNext({ hours, minutes })} className='button'>Далее</button>  
-
-  
+            <button onClick={() => handleNextWithValidation({ hours, minutes })} className='button'>Далее</button>  
+            {errorMessage && <p className="error-message">{errorMessage}</p>}
           </div>    
         );  
   
@@ -107,7 +178,8 @@ const Body = ({ step, userName, handleStart, handleNext, formData }) => {
               />  
             </div>  
           </div>  
-          <button onClick={() => handleNext({ day, month, year })} className='button'>Далее</button>  
+          <button onClick={() => handleNextWithValidation({ day, month, year })} className='button'>Далее</button>  
+          {errorMessage && <p className="error-message">{errorMessage}</p>}
         </div>  
         );  
   
@@ -115,55 +187,30 @@ const Body = ({ step, userName, handleStart, handleNext, formData }) => {
         return (  
           <div className='body'>  
             <h2>Место рождения</h2>  
-            <br />  
-            <span>Указание места рождения (страна и город) поможет определить положение планет, Луны и звёзд.</span><br />   
-            <input  
-              type="text"  
-              placeholder="Страна, город"  
-              value={placeOfBirth}  
-              onChange={(e) => setPlaceOfBirth(e.target.value)}  
-            />  
-            <button onClick={() => handleNext({ placeOfBirth })} className='button'>Далее</button>  
+            <p>Укажите место, где вы родились.</p>  
+            <input value={placeOfBirth} onChange={(e) => setPlaceOfBirth(e.target.value)} placeholder='Место рождения' />  
+            <button onClick={() => handleNextWithValidation({ placeOfBirth })} className='button'>Далее</button>  
+            {errorMessage && <p className="error-message">{errorMessage}</p>}
           </div>  
         );  
-        
-      case 4:  
-        return (  
-          <div className='body'>  
-            <h2>Ваше Имя:</h2>  
-            <br />  
-            <span>Имя влияет на судьбу человека ровно так же, как и звёзды.</span>  <br />  
-            <input  
-              type="text"  
-              placeholder="Имя"  
-              value={username}  
-              onChange={(e) => setUsername(e.target.value)}  
-            />  
-            <button onClick={() => handleNext({ username })} className='button'>Далее</button>  
-          </div>  
-        );  
-
-      case 5:  
-        return (  
-          <div className='body'>  
-            <h2>Ваши введенные данные:</h2>  
-            <p><strong>Время:</strong> {unknownTime ? 'Неизвестно' : `${hours} часов и ${minutes} минут`}</p>  
-            <p><strong>Дата рождения:</strong> {day}/{month}/{year}</p>  
-            <p><strong>Место рождения:</strong> {placeOfBirth}</p>  
-            <p><strong>Имя:</strong> {username}</p>  
-          </div>  
-        );   
   
-      default:  
-        return null;  
-    }  
+        case 4:  
+    return (  
+      <div className='body'>  
+        <h2>Ваше имя</h2>  
+        <p>Введите ваше имя, чтобы мы могли к вам обращаться.</p>  
+        <input value={username} onChange={(e) => setUsername(e.target.value)} placeholder='Ваше имя' />  
+        <button onClick={() => handleFinish()} className='button'>Завершить</button>  
+        {errorMessage && <p className="error-message">{errorMessage}</p>}
+      </div>  
+    );  
+
+  default:  
+    return null;  
+}  
   };  
   
-  return (  
-    <div>  
-      {renderStep()}  
-    </div>  
-  );  
+  return <>{renderStep()}</>;  
 };  
-
-export default Body;  
+  
+export default Body;
