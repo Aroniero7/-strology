@@ -9,9 +9,16 @@ function App() {
   const {onToggleButton, tg} = useTelegram();
 
   useEffect(() => {
-    tg.ready();
-  },[])
+    console.log("Telegram API:", tg);
+    console.log("Init data unsafe:", tg.initDataUnsafe);
 
+    if (tg.initDataUnsafe?.user) {
+        console.log("User data found:", tg.initDataUnsafe.user);
+        setUser(tg.initDataUnsafe.user);
+    } else {
+        console.log("No user data found.");
+    }
+}, [tg]);
  
 
 
