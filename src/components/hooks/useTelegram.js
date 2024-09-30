@@ -27,6 +27,6 @@ export function useTelegram() {
         onClose,
         onToggleButton,
         tg,
-        user, // Теперь возвращаем состояние пользователя
+        user: tg.initDataUnsafe?.user,
     }
 }
