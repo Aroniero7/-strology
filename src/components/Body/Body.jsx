@@ -56,11 +56,11 @@ const Body = ({ step, userName, handleStart, handleNext, formData }) => {
             <div style={{ marginTop: '10px' }}>  
               <button  
                 onClick={() => {  
-                  setUnknownTime(true); // Установить состояние на true  
-                  handleNext({ hours: '', minutes: '' }); // Передать пустые значения для часов и минут  
+                  setUnknownTime(true); 
+                  handleNext({ hours: '', minutes: '' }); 
                 }}  
                 className='button'   
-                style={{ margin: 'auto', backgroundColor: unknownTime ? 'lightcoral' : 'initial' }} // Изменить цвет  
+                style={{ margin: 'auto', backgroundColor: unknownTime ? 'lightcoral' : 'initial' }} 
               >  
                 Я не знаю времени  
               </button>  
@@ -85,7 +85,7 @@ const Body = ({ step, userName, handleStart, handleNext, formData }) => {
                 max="31"  
                 value={day}  
                 onChange={(e) => setDay(e.target.value)}  
-                placeholder="День" // Используем placeholder вместо label  
+                placeholder="День" 
               />  
             </div>  
             <div style={{ marginLeft: '10px' }}>  
@@ -95,7 +95,7 @@ const Body = ({ step, userName, handleStart, handleNext, formData }) => {
                 max="12"  
                 value={month}  
                 onChange={(e) => setMonth(e.target.value)}  
-                placeholder="Месяц" // Используем placeholder вместо label  
+                placeholder="Месяц" 
               />  
             </div>  
             <div style={{ marginLeft: '10px' }}>  
@@ -103,7 +103,7 @@ const Body = ({ step, userName, handleStart, handleNext, formData }) => {
                 type="number"  
                 value={year}  
                 onChange={(e) => setYear(e.target.value)}  
-                placeholder="Год" // Используем placeholder вместо label  
+                placeholder="Год" 
               />  
             </div>  
           </div>  
