@@ -1,10 +1,15 @@
-const tg = window.Telegram.WebApp;
+const { useEffect, useState } = require('react');
 
 export function useTelegram() {
     const tg = window.Telegram.WebApp;
+    const [user, setUser] = useState(null);
 
-    // Логируем данные о пользователе
-    console.log(tg.initDataUnsafe);
+    useEffect(() => {
+        console.log(tg.initDataUnsafe); // Логируем данные о пользователе
+        if (tg.initDataUnsafe?.user) {
+            setUser(tg.initDataUnsafe.user);
+        }
+    }, [tg]);
 
     const onClose = () => {
         tg.close();
@@ -22,6 +27,6 @@ export function useTelegram() {
         onClose,
         onToggleButton,
         tg,
-        user: tg.initDataUnsafe?.user || {}, // Задаем пустой объект по умолчанию
+        user, // Теперь возвращаем состояние пользователя
     }
 }
