@@ -81,7 +81,7 @@ const Body = ({ step, userName, handleStart, handleNext, formData }) => {
       return;
     }
 
-    // Переход на следующий шаг, если валидация пройдена
+    // Переход на следующий шаг, если валидация пройдена1
     handleNext(currentData);
   };
 
